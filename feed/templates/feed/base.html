@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,10 +14,81 @@
       crossorigin="anonymous"
     />
 
-    <title>Hello, world!</title>
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cookie&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="{% static 'feed/main.css' %}" />
+
+    <title>Instaclone</title>
   </head>
   <body>
-    {% block content %} {% endblock content %}
+    <nav
+      class="navbar navbar-expand-lg navbar-dark border-bottom"
+    >
+      <div class="container">
+        <a class="navbar-brand ms-4" id="brand-icon" href="#">Instaclone</a>
+        <form class="d-flex">
+          <input
+            class="form-control shadow-none me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+        </form>
+        <svg
+          aria-label="Activity Feed"
+          color="#262626"
+          fill="#262626"
+          height="24"
+          role="img"
+          viewBox="0 0 24 24"
+          width="24"
+        >
+          <circle
+            cx="12.004"
+            cy="12.004"
+            fill="none"
+            r="10.5"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke-width="2"
+          ></circle>
+          <path
+            d="M18.793 20.014a6.08 6.08 0 00-1.778-2.447 3.991 3.991 0 00-2.386-.791H9.38a3.994 3.994 0 00-2.386.791 6.09 6.09 0 00-1.779 2.447"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke-width="2"
+          ></path>
+          <circle
+            cx="12.006"
+            cy="9.718"
+            fill="none"
+            r="4.109"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke-width="2"
+          ></circle>
+        </svg>
+      </div>
+    </nav>
+    <main role="main" class="container mt-2">
+      <div class="row">
+        <div class="col-lg-8">{% block content %}{% endblock %}</div>
+        <div class="col d-none d-lg-block">
+          {% block sidebar %}{% endblock %}
+        </div>
+      </div>
+    </main>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
