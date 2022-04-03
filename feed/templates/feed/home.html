@@ -1,8 +1,26 @@
-{% extends 'feed/base.html' %}
-{% block content %}
-<h1>This is the homepage!</h1>
-{% endblock content %}
-{% block sidebar %}
+{% extends 'feed/base.html' %} {% block content %}
+<div class="container post-container mt-2 p-0 border border-1">
+  <div class="row align-items-center">
+    <div class="col-auto ms-4 p-2">
+      <img
+        class="home-post-dp"
+        src="../../static/feed/sample-post-dp.jpg"
+        alt="instaclone-post-dp"
+      />
+    </div>
+    <div class="col-auto home-post-username fw-bold">advaithhl</div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <img
+        class="home-post-img"
+        src="../../static/feed/sample-post.jpg"
+        alt="instaclone-image"
+      />
+    </div>
+  </div>
+</div>
+{% endblock content %} {% block sidebar %}
 <h1>This is the sidebar!!</h1>
 <p>This is hidden on smaller displays</p>
 {% endblock sidebar %}

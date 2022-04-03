@@ -28,10 +28,8 @@
     <title>Instaclone</title>
   </head>
   <body>
-    <nav
-      class="navbar navbar-expand-lg navbar-dark border-bottom"
-    >
-      <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark border-bottom">
+      <div class="container justify-content-around">
         <a class="navbar-brand ms-4" id="brand-icon" href="#">Instaclone</a>
         <form class="d-flex">
           <input
@@ -81,10 +79,10 @@
         </svg>
       </div>
     </nav>
-    <main role="main" class="container mt-2">
-      <div class="row">
-        <div class="col-lg-8">{% block content %}{% endblock %}</div>
-        <div class="col d-none d-lg-block">
+    <main role="main" class="d-flex mt-2 justify-content-around">
+      <div class="row p-0">
+        <div class="col p-0">{% block content %}{% endblock %}</div>
+        <div class="col d-none d-lg-block ms-4">
           {% block sidebar %}{% endblock %}
         </div>
       </div>
