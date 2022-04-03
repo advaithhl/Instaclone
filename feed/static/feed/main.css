@@ -15,11 +15,18 @@ body {
   width: 40px;
 }
 
-.home-post-username {
+.home-post-text {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif;
   font-weight: 400;
   font-size: 14px;
+}
+
+.home-post-time {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  font-weight: 400;
+  font-size: 10px;
 }
 
 .home-post-img {
@@ -27,6 +34,12 @@ body {
   height: auto;
 }
 
+.action-button {
+  background-color: transparent;
+  border: 0px;
+}
+
 .post-container {
   background-color: #ffffff;
+  max-width: 600px;
 }
