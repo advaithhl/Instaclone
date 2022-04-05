@@ -1,0 +1,62 @@
+{% extends 'users/base.html' %} {% block content %}
+<div class="row mt-4">
+  <div class="col-auto mx-auto">
+    <div class="container login-container p-0 border border-1">
+      <div class="row mx-auto align-items-center">
+        <div class="col-auto mt-4 mx-auto">
+          <p id="brand-icon">Instaclone</p>
+        </div>
+      </div>
+      <div class="row mx-auto align-items-center">
+        <div class="col-auto mx-auto">
+          <form>
+            <div class="mb-3 login-field">
+              <input
+                type="text"
+                class="form-control login-field shadow-none"
+                id="usernameInput"
+                placeholder="Username"
+                required="true"
+              />
+            </div>
+            <div class="mb-3">
+              <input
+                type="password"
+                class="form-control login-field shadow-none"
+                id="passwordInput"
+                placeholder="Password"
+                required="true"
+              />
+            </div>
+            <div class="d-grid mx-auto mb-3">
+              <button
+                id="loginButton"
+                type="submit"
+                class="btn btn-primary"
+                disabled
+              >
+                Log In
+              </button>
+            </div>
+          </form>
+          <div class="mb-3">
+            <small>
+              <a href="#">Forgot password?</a>
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container login-container p-0 mt-2 border border-1">
+      <div class="row mx-auto align-items-center">
+        <div class="col-auto mt-4 mx-auto">
+          <p id="signup-box-text">
+            Don't have an account?
+            <a href="#"> Sign up </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

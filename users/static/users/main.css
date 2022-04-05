@@ -1,0 +1,33 @@
+body {
+  background-color: #fbfafa;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+#brand-icon {
+  color: black;
+  font-family: "Cookie", cursive;
+  font-size: 64px;
+}
+
+#signup-box-text {
+  font-family: -apple-system, Impact, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  font-size: medium;
+}
+
+.login-container {
+  background-color: #ffffff;
+  min-width: 400px;
+}
+
+.login-field {
+  font-family: -apple-system, Impact, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  color: rgba(var(--i1d, 38, 38, 38), 1);
+  background-color: #fafafa;
+  font-size: 14px;
+  line-height: 18px;
+}
