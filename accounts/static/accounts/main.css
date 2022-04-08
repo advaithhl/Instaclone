@@ -31,3 +31,10 @@ a:link {
   font-size: 14px;
   line-height: 18px;
 }
+
+.login-incorrect-cred {
+  font-family: -apple-system, Impact, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  color: red;
+  font-size: 14px;
+}

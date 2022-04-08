@@ -1,4 +1,4 @@
-{% extends 'accounts/base.html' %} {% block content %}
+{% extends 'accounts/base.html' %} {% load widget_tweaks %} {% block content %}
 <div class="row mt-4">
   <div class="col-auto mx-auto">
     <div class="container login-container p-0 border border-1">
@@ -9,32 +9,16 @@
       </div>
       <div class="row mx-auto align-items-center">
         <div class="col-auto mx-auto">
-          <form>
-            <div class="mb-3 login-field">
-              <input
-                type="text"
-                class="form-control login-field shadow-none"
-                id="usernameInput"
-                placeholder="Username"
-                required="true"
-              />
+          <form method="POST" action="{% url 'instaclone-accounts_login' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              {% render_field form.username class+="form-control login-field shadow-none" %}
             </div>
             <div class="mb-3">
-              <input
-                type="password"
-                class="form-control login-field shadow-none"
-                id="passwordInput"
-                placeholder="Password"
-                required="true"
-              />
+              {% render_field form.password class+="form-control login-field shadow-none" %}
             </div>
             <div class="d-grid mx-auto mb-3">
-              <button
-                id="loginButton"
-                type="submit"
-                class="btn btn-primary"
-                disabled
-              >
+              <button id="loginButton" type="submit" class="btn btn-primary">
                 Log In
               </button>
             </div>
@@ -46,6 +30,17 @@
           </div>
         </div>
       </div>
+      {% if form.errors %}
+      <div class="row">
+        <div class="col-auto mx-auto">
+          <p class="login-incorrect-cred">
+            Sorry, your password was incorrect.
+            <br>
+            Please double-check your password.
+          </p>
+        </div>
+      </div>
+      {% endif %}
     </div>
     <div class="container login-container p-0 mt-2 border border-1">
       <div class="row mx-auto align-items-center">
