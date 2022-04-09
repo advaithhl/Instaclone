@@ -1,0 +1,103 @@
+{% extends 'accounts/base.html' %} {% load widget_tweaks %} {% block content %}
+<div class="row mt-4">
+  <div class="col-auto mx-auto">
+    <div class="container login-container p-0 border border-1">
+      <div class="row mx-auto align-items-center">
+        <div class="col-auto mt-4 mx-auto">
+          <p id="brand-icon">Instaclone</p>
+        </div>
+      </div>
+      <div class="row mx-auto align-items-center">
+        <div class="col-auto mx-auto">
+          <form method="POST" action="{% url 'instaclone-accounts_register' %}">
+            {% csrf_token %}
+            <div class="mb-3 has-validation">
+              {% if form.username.errors %}
+                {% render_field form.username placeholder="Username" class+="form-control is-invalid login-field shadow-none" %}
+                <div class="invalid-feedback">
+                  <ol class="p-0 small">
+                  {% for error in form.username.errors %}
+                      {{ error|escape }}
+                  {% endfor %}
+                  </ol>
+                </div>
+              {% else %}
+                {% render_field form.username placeholder="Username" class+="form-control login-field shadow-none" %}
+              {% endif %}
+            </div>
+            <div class="mb-3">
+              {% render_field form.fullname placeholder="Full Name" class+="form-control login-field shadow-none" %}
+            </div>
+            <div class="mb-3 has-validation">
+              {% if form.email.errors %}
+                {% render_field form.email placeholder="Email address" class+="form-control is-invalid login-field shadow-none" %}
+                <div class="invalid-feedback">
+                  <ol class="p-0 small">
+                  {% for error in form.email.errors %}
+                      {{ error|escape }}
+                  {% endfor %}
+                  </ol>
+                </div>
+              {% else %}
+                {% render_field form.email placeholder="Email address" class+="form-control login-field shadow-none" %}
+              {% endif %}
+            </div>
+            <div class="mb-3 has-validation">
+              {% if form.password1.errors %}
+                {% render_field form.password1 placeholder="Password" class+="form-control is-invalid login-field shadow-none" %}
+                <div class="invalid-feedback">
+                  <ol class="p-0 small">
+                  {% for error in form.password1.errors %}
+                      {{ error|escape }}
+                  {% endfor %}
+                  </ol>
+                </div>
+              {% else %}
+                {% render_field form.password1 placeholder="Password" class+="form-control login-field shadow-none" %}
+              {% endif %}
+            </div>
+            <div class="mb-3 has-validation">
+              {% if form.password2.errors %}
+                {% render_field form.password2 placeholder="Confirm password" class+="form-control is-invalid login-field shadow-none" %}
+                <div class="invalid-feedback">
+                  <ol class="p-0 small">
+                  {% for error in form.password2.errors %}
+                      {{ error|escape }}
+                  {% endfor %}
+                  </ol>
+                </div>
+              {% else %}
+                {% render_field form.password2 placeholder="Confirm password" class+="form-control login-field shadow-none" %}
+              {% endif %}
+            </div>
+            <div class="d-grid mx-auto mb-3">
+              <button id="registerButton" type="submit" class="btn btn-primary">
+                Sign Up
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      {% if form.errors %}
+      <div class="row">
+        <div class="col-auto mx-auto">
+          <p class="login-incorrect-cred">
+            {{ form.non_field_errors }}
+          </p>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    <div class="container login-container p-0 mt-2 border border-1">
+      <div class="row mx-auto align-items-center">
+        <div class="col-auto mt-4 mx-auto">
+          <p id="signup-box-text">
+            Have an account?
+            <a href="#"> Log in </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -8,4 +8,5 @@ urlpatterns = [
     path('login/',
          auth_views.LoginView.as_view(template_name='accounts/login.html'),
          name='instaclone-accounts_login'),
+    path('register/', views.register_view, name='instaclone-accounts_register'),
 ]
