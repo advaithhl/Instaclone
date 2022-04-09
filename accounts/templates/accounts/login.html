@@ -12,10 +12,10 @@
           <form method="POST" action="{% url 'instaclone-accounts_login' %}">
             {% csrf_token %}
             <div class="mb-3">
-              {% render_field form.username class+="form-control login-field shadow-none" %}
+              {% render_field form.username placeholder="Username" class+="form-control login-field shadow-none" %}
             </div>
             <div class="mb-3">
-              {% render_field form.password class+="form-control login-field shadow-none" %}
+              {% render_field form.password placeholder="Password" class+="form-control login-field shadow-none" %}
             </div>
             <div class="d-grid mx-auto mb-3">
               <button id="loginButton" type="submit" class="btn btn-primary">
