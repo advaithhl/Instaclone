@@ -1,0 +1,29 @@
+<!-- THIS TEMPLATE IS NOT USED CURRENTLY -->
+<!-- See 'communication/email_base.html' for explanation. -->
+{% extends 'communication/email_base.html' %} {% block content %}
+<div class="col-10 mx-auto">
+  <p>Hi {{ firstname }},</p>
+  <p>
+    You are receiving this email because you had signed up for Instaclone as
+    <span class="username-decoration" style="color: #ff5733; font-weight: bold">
+      {{ username }} </span
+    >.
+  </p>
+  <div class="d-grid gap-2">
+    <a
+      class="btn btn-outline-dark shadow-none"
+      type="button"
+      style="-webkit-appearance: none; -moz-appearance: none; appearance: none"
+      href="http://127.0.0.1:8000/accounts/login"
+      target="_blank"
+    >
+      <span class="button-text" style="font-family: 'Roboto Mono', monospace">
+        LOGIN TO INSTACLONE
+      </span>
+    </a>
+  </div>
+  <br /><br />
+  <p>Have a great day!</p>
+  <p><b>Team Instaclone</b></p>
+</div>
+{% endblock content %}
