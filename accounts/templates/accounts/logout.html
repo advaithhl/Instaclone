@@ -1,0 +1,29 @@
+{% extends 'accounts/base.html' %} {% load widget_tweaks %} {% block content %}
+<div class="row mt-4">
+  <div class="col-auto mx-auto">
+    <div class="container login-container p-0 border border-1">
+      <div class="row mx-auto align-items-center">
+        <div class="col-auto mt-4 mx-auto">
+          <p id="brand-icon">Instaclone</p>
+        </div>
+      </div>
+      <div class="row mx-auto align-items-center">
+        <div class="col-auto mx-auto">
+          <div class="mb-3">
+            <p>You have logged out 👋🏻</p>
+          </div>
+        </div>
+      </div>
+      <div class="row mx-auto align-items-center">
+        <div class="col-auto mx-auto">
+          <div class="mb-3">
+            <small>
+              <a href="#">Login again</a>
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

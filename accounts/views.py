@@ -1,3 +1,4 @@
+from django.contrib.auth import logout
 from django.shortcuts import redirect, render
 
 from .forms import UserRegisterForm
@@ -9,6 +10,12 @@ def empty_path(request):
 
 def login_view(request):
     return render(request, 'accounts/login.html')
+
+
+def logout_view(request):
+    if request.user.is_authenticated:
+        logout(request)
+    return render(request, 'accounts/logout.html')
 
 
 def register_view(request):
