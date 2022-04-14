@@ -1,4 +1,5 @@
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 from .forms import UserRegisterForm
@@ -12,6 +13,7 @@ def login_view(request):
     return render(request, 'accounts/login.html')
 
 
+@login_required
 def logout_view(request):
     if request.user.is_authenticated:
         logout(request)

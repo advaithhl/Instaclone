@@ -128,6 +128,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# The default login URL
+LOGIN_URL = 'instaclone-accounts_login'
+
 # Redirect to feed after logging in
 LOGIN_REDIRECT_URL = 'instaclone-main_feed'
 
