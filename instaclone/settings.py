@@ -131,6 +131,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # The default login URL
 LOGIN_URL = 'instaclone-accounts_login'
 
+# Media directory
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 # Redirect to feed after logging in
 LOGIN_REDIRECT_URL = 'instaclone-main_feed'
 
