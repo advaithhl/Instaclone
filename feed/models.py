@@ -8,7 +8,7 @@ def _user_content_dir(instance, filename):
 
 
 class Post(models.Model):
-    creator = models.OneToOneField(
+    creator = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='posts')
     caption = models.CharField(max_length=512)
     liked_users = models.ManyToManyField(User, related_name='likes')
