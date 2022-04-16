@@ -1,4 +1,5 @@
 {% extends 'feed/base.html' %} {% block content %}
+{% for post in posts %}
 <div class="container post-container mt-2 p-0 border border-1">
   <div class="row mx-auto align-items-center">
     <div class="col-auto ms-2 p-2">
@@ -8,14 +9,14 @@
         alt="instaclone-post-dp"
       />
     </div>
-    <div class="col-auto home-post-text fw-bold">advaithhl</div>
+    <div class="col-auto home-post-text fw-bold">{{ post.creator.username }}</div>
   </div>
   <div class="row mx-auto">
     <div class="col-auto p-0">
       <img
         class="home-post-img"
         src="../../static/feed/placeholder.png"
-        actual-src="https://picsum.photos/470"
+        actual-src="{{ post.content.url }}"
         onload="if(this.src !== this.getAttribute('actual-src')) this.src=this.getAttribute('actual-src');"
         alt="instaclone-image"
       />
@@ -64,25 +65,39 @@
   </div>
   <!-- Begin likes count -->
   <div class="row mx-auto">
-    <div class="col-auto mt-1 home-post-text fw-bold">12,345 likes</div>
+    {% with post.liked_users.count as likes_count %}
+    <div class="col-auto mt-1 home-post-text fw-bold">
+      {% if likes_count > 1 %}
+      {{ post.liked_users.count }} likes
+      {% else %}
+      {{ post.liked_users.count }} like
+      {% endif %}
+    </div>
+    {% endwith %}
   </div>
   <!-- End likes count -->
   <!-- Begin description -->
   <div class="row mx-auto">
     <div class="col-auto mt-1 home-post-text">
-      <div class="fw-bold">advaithhl</div>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus velit
-      perferendis autem quasi ducimus corporis iure quam porro ex mollitia aut,
-      ipsam voluptate commodi quia voluptatibus illum nesciunt sapiente nemo.
+      <div class="fw-bold">{{ post.creator.username }}</div>
+      {{ post.caption }}
     </div>
   </div>
   <!-- End description -->
   <!-- Begin comment loader -->
+  {% with post.comment_set.count as comments_count %}
+  {% if comments_count != 0 %}
   <div class="row mx-auto">
     <div class="col-auto mt-1 home-post-text text-muted">
-      View all 21 comments
+      {% if comments_count > 1 %}
+      View all {{ comments_count }} comments
+      {% else %}
+      View {{ comments_count }} comment
+      {% endif %}
     </div>
   </div>
+  {% endif %}
+  {% endwith %}
   <!-- End comment loader -->
   <!-- Begin time posted -->
   <div class="row mx-auto mb-2">
@@ -90,6 +105,7 @@
   </div>
   <!-- End time posted -->
 </div>
+{% endfor %}
 {% endblock content %} {% block sidebar %}
 <h1>This is the sidebar!!</h1>
 <p>This is hidden on smaller displays</p>
