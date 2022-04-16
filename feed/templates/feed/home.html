@@ -14,7 +14,9 @@
     <div class="col-auto p-0">
       <img
         class="home-post-img"
-        src="../../static/feed/sample-post.jpg"
+        src="../../static/feed/placeholder.png"
+        actual-src="https://picsum.photos/470"
+        onload="if(this.src !== this.getAttribute('actual-src')) this.src=this.getAttribute('actual-src');"
         alt="instaclone-image"
       />
     </div>
