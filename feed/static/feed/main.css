@@ -51,5 +51,11 @@ body {
 
 .post-container {
   background-color: #ffffff;
-  max-width: 600px;
+}
+
+@media (min-width: 992px) {
+  /* The image size is 538, 2px is for border. */
+  .post-container {
+    min-width: 540px;
+  }
 }
