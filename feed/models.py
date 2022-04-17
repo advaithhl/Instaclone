@@ -14,7 +14,6 @@ class Post(models.Model):
     liked_users = models.ManyToManyField(User, related_name='likes')
     time_created = models.DateTimeField(default=timezone.now)
     content = models.ImageField(
-        default='placeholder.png',
         upload_to=_user_content_dir,
     )
 

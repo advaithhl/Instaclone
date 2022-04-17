@@ -15,9 +15,7 @@
     <div class="col-auto p-0">
       <img
         class="home-post-img"
-        src="../../static/feed/placeholder.png"
-        actual-src="{{ post.content.url }}"
-        onload="if(this.src !== this.getAttribute('actual-src')) this.src=this.getAttribute('actual-src');"
+        src="{{ post.content.url }}"
         alt="instaclone-image"
       />
     </div>
