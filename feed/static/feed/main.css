@@ -49,9 +49,33 @@ body {
   height: auto;
 }
 
+.large-post-img {
+  min-width: 540px;
+}
+
 .action-button {
   background-color: transparent;
   border: 0px;
+  color: currentColor;
+}
+
+.action-button:hover {
+  color: #8e8e8e;
+}
+
+.view-post-top-container {
+  background-color: #ffffff;
+}
+
+.view-post-side-container {
+  background-color: #ffffff;
+}
+
+.view-post-muted-text {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
 }
 
 .post-container {
@@ -62,5 +86,12 @@ body {
   /* The image size is 538, 2px is for border. */
   .post-container {
     min-width: 540px;
+  }
+}
+
+/* This is a dirty hack. Need to fix. */
+@media (min-width: 1038px) {
+  .view-post-side-container {
+    min-width: 450px;
   }
 }

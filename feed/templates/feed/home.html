@@ -41,7 +41,11 @@
     </div>
     <!-- Comment button -->
     <div class="col-auto mt-1 p-1">
-      <button class="action-button" type="button">
+      <a
+        class="action-button"
+        type="button"
+        href="{% url 'instaclone-post_view' %}?id={{post.id}}"
+      >
         <svg
           aria-label="Comment"
           fill="#000000"
@@ -57,7 +61,7 @@
             stroke-width="2"
           ></path>
         </svg>
-      </button>
+      </a>
     </div>
     <!-- End action row -->
   </div>

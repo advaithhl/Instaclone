@@ -1,0 +1,75 @@
+{% extends 'feed/base.html' %} {% block content %}
+<div class="d-lg-none">
+  <div class="row mx-auto align-items-center">
+    <div class="col-auto p-2">
+      <img
+        class="home-post-dp"
+        src="../../static/feed/sample-post-dp.jpg"
+        alt="instaclone-post-dp"
+      />
+    </div>
+    <div class="col-auto home-post-text fw-bold">
+      {{ post.creator.username }}
+    </div>
+  </div>
+</div>
+<div class="container p-0">
+  <img
+    class="large-post-img"
+    src="{{ post.content.url }}"
+    alt="instaclone-image"
+  />
+</div>
+{% endblock content %}
+{% block sidebar %}
+<div class="container view-post-side-container p-0">
+  <div class="row mx-auto align-items-center">
+    <div class="col-auto p-2">
+      <img
+        class="home-post-dp"
+        src="../../static/feed/sample-post-dp.jpg"
+        alt="instaclone-post-dp"
+      />
+    </div>
+    <div class="col-auto home-post-text fw-bold">
+      {{ post.creator.username }}
+    </div>
+  </div>
+  <hr style="margin-top: 0" />
+  <div class="row mx-auto">
+    <div class="col-auto p-2">
+      <img
+        class="home-post-dp"
+        src="../../static/feed/sample-post-dp.jpg"
+        alt="instaclone-post-dp"
+      />
+    </div>
+    <div class="col-auto mt-1 home-post-text">
+      <div class="fw-bold">{{ post.creator.username }}</div>
+      {{ post.caption }}
+      <div class="row mx-auto mb-2">
+        <div class="col-auto mt-1 p-0 view-post-muted-text text-muted">17h</div>
+      </div>
+    </div>
+  </div>
+  <hr style="color: #ffffff" />
+  {% for comment in post.comment_set.iterator %}
+  <div class="row mx-auto">
+    <div class="col-auto p-2">
+      <img
+        class="home-post-dp"
+        src="../../static/feed/sample-post-dp.jpg"
+        alt="instaclone-post-dp"
+      />
+    </div>
+    <div class="col-auto mt-1 home-post-text">
+      <div class="fw-bold">{{ comment.author.username }}</div>
+        {{ comment.text }}
+      <div class="row mx-auto mb-2">
+        <div class="col-auto mt-1 p-0 view-post-muted-text text-muted">17h</div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock sidebar %}
