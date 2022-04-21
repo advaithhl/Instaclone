@@ -68,6 +68,7 @@ body {
 }
 
 .view-post-side-container {
+  width: 300px;
   background-color: #ffffff;
 }
 
