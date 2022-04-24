@@ -79,6 +79,16 @@ body {
   font-size: 12px;
 }
 
+.view-post-comments-box {
+  height: 390px;
+  overflow-y: auto;
+}
+
+.hr-no-margin {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 .post-container {
   background-color: #ffffff;
 }
