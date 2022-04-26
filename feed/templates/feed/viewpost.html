@@ -1,4 +1,5 @@
 {% extends 'feed/base.html' %} {% block content %}
+{% load date_formats %}
 <div class="d-lg-none">
   <div class="row mx-auto align-items-center">
     <div class="col-auto p-2">
@@ -138,7 +139,9 @@
   <!-- End likes count -->
   <!-- Begin time posted -->
   <div class="row mx-auto mb-2">
-    <div class="col-auto mt-1 home-post-time text-muted">17 HOURS AGO</div>
+    <div class="col-auto mt-1 home-post-time text-muted">
+      {{ post.time_created | post_time_fmt }}
+    </div>
   </div>
   <!-- End time posted -->
   <form action="#" method="post">
