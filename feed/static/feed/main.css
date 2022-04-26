@@ -80,8 +80,22 @@ body {
 }
 
 .view-post-comments-box {
-  height: 352px;
+  height: 330px;
   overflow-y: auto;
+}
+
+.comment-create-input {
+  box-shadow: none !important;
+  border: none;
+  height: 38px;
+  resize: none;
+}
+
+#post-button {
+  color: #4193EF;
+  display: none;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .hr-no-margin {
