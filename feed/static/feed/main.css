@@ -92,7 +92,8 @@ body {
 }
 
 #post-button {
-  color: #4193EF;
+  color: #4193ef;
+  display: none;
   font-size: 14px;
   font-weight: 600;
 }
