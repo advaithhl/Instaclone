@@ -63,6 +63,10 @@ body {
   color: #8e8e8e;
 }
 
+.like-button:hover >svg {
+  fill: #8e8e8e;
+}
+
 .view-post-top-container {
   background-color: #ffffff;
 }

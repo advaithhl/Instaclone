@@ -19,3 +19,19 @@ $(document).ready(function () {
     },
   });
 });
+
+function getLikesCountString(newCount) {
+  return `${newCount} ${newCount != 1 ? "likes" : "like"}`;
+}
+
+function likePost(id, currentCount) {
+  $(`#like-div-${id}`).hide();
+  $(`#unlike-div-${id}`).show();
+  $(`#likes-count-${id}`).text(() => getLikesCountString(currentCount + 1));
+}
+
+function unlikePost(id, currentCount) {
+  $(`#unlike-div-${id}`).hide();
+  $(`#like-div-${id}`).show();
+  $(`#likes-count-${id}`).text(() => getLikesCountString(currentCount));
+}
