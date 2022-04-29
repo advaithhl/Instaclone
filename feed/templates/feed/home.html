@@ -26,7 +26,11 @@
   <!-- Begin action row -->
   <div class="row mx-auto">
     <!-- Like button -->
-    <div class="col-auto mt-1 ms-1 p-1" id="like-div-{{ post.id }}">
+    <div 
+      class="col-auto mt-1 ms-1 p-1"
+      id="like-div-{{ post.id }}"
+      {% if user in post.liked_users.all %}style="display: none"{% endif %}
+    >
       <button
         class="like-button action-button"
         type="button"
@@ -48,7 +52,7 @@
     <div
       class="col-auto mt-1 ms-1 p-1"
       id="unlike-div-{{ post.id }}"
-      style="display: none"
+      {% if user not in post.liked_users.all %}style="display: none"{% endif %}
     >
       <button
         class="action-button"
