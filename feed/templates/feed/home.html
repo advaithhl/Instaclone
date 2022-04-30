@@ -106,11 +106,7 @@
   <div class="row mx-auto">
     {% with post.liked_users.count as likes_count %}
     <div class="col-auto mt-1 home-post-text fw-bold" id="likes-count-{{ post.id }}">
-      {% if likes_count > 1 %}
-      {{ post.liked_users.count }} likes
-      {% else %}
-      {{ post.liked_users.count }} like
-      {% endif %}
+      {{ likes_count }} like{{ likes_count|pluralize }}
     </div>
     {% endwith %}
   </div>

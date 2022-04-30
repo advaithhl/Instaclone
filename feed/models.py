@@ -11,7 +11,7 @@ class Post(models.Model):
     creator = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='posts')
     caption = models.CharField(max_length=512)
-    liked_users = models.ManyToManyField(User, related_name='likes')
+    liked_users = models.ManyToManyField(User, related_name='likes', blank=True)
     time_created = models.DateTimeField(default=timezone.now)
     content = models.ImageField(
         upload_to=_user_content_dir,
