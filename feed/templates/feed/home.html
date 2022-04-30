@@ -34,7 +34,7 @@
       <button
         class="like-button action-button"
         type="button"
-        onclick="likePost({{ post.id }},{{ post.liked_users.count }})"
+        onclick="likePost({{ post.id }})"
       >
         <svg
           aria-label="Like"
@@ -58,7 +58,7 @@
         class="action-button"
         id="unlike-button"
         type="button"
-        onclick="unlikePost({{ post.id }},{{ post.liked_users.count }})"
+        onclick="unlikePost({{ post.id }})"
       >
         <svg
           aria-label="Unlike"

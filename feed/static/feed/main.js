@@ -24,19 +24,25 @@ function getLikesCountString(newCount) {
   return `${newCount} ${newCount != 1 ? "likes" : "like"}`;
 }
 
-function likePost(id, currentCount, liked) {
+function likePost(id) {
   $(`#like-div-${id}`).hide();
   $(`#unlike-div-${id}`).show();
-  $(`#likes-count-${id}`).text(() => getLikesCountString(currentCount + 1));
+  $(`#likes-count-${id}`).text((_, currentContent) => {
+    let currentCount = parseInt(currentContent.trim().split(" ")[0]);
+    return getLikesCountString(currentCount + 1);
+  });
   const xhr = new XMLHttpRequest();
   xhr.open("GET", `like/?id=${id}`, false);
   xhr.send();
 }
 
-function unlikePost(id, currentCount, liked) {
+function unlikePost(id) {
   $(`#unlike-div-${id}`).hide();
   $(`#like-div-${id}`).show();
-  $(`#likes-count-${id}`).text(() => getLikesCountString(currentCount - 1));
+  $(`#likes-count-${id}`).text((_, currentContent) => {
+    let currentCount = parseInt(currentContent.trim().split(" ")[0]);
+    return getLikesCountString(currentCount - 1);
+  });
   const xhr = new XMLHttpRequest();
   xhr.open("GET", `unlike/?id=${id}`, false);
   xhr.send();
