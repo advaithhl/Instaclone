@@ -32,7 +32,7 @@ function likePost(id) {
     return getLikesCountString(currentCount + 1);
   });
   const xhr = new XMLHttpRequest();
-  xhr.open("GET", `like/?id=${id}`, false);
+  xhr.open("GET", `/like/?id=${id}`, false);
   xhr.send();
 }
 
@@ -44,6 +44,6 @@ function unlikePost(id) {
     return getLikesCountString(currentCount - 1);
   });
   const xhr = new XMLHttpRequest();
-  xhr.open("GET", `unlike/?id=${id}`, false);
+  xhr.open("GET", `/unlike/?id=${id}`, false);
   xhr.send();
 }

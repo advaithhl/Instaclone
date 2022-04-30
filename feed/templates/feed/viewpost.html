@@ -82,11 +82,15 @@
   <!-- Begin action row -->
   <div class="row mx-auto">
     <!-- Like button -->
-    <div class="col-auto mt-1 ms-1 p-1" id="like-div-{{ post.id }}">
+    <div 
+      class="col-auto mt-1 ms-1 p-1"
+      id="like-div-{{ post.id }}"
+      {% if user in post.liked_users.all %}style="display: none"{% endif %}
+    >
       <button
         class="like-button action-button"
         type="button"
-        onclick="likePost({{ post.id }},{{ post.liked_users.count }})"
+        onclick="likePost({{ post.id }})"
       >
         <svg
           aria-label="Like"
@@ -104,13 +108,13 @@
     <div
       class="col-auto mt-1 ms-1 p-1"
       id="unlike-div-{{ post.id }}"
-      style="display: none"
+      {% if user not in post.liked_users.all %}style="display: none"{% endif %}
     >
       <button
         class="action-button"
         id="unlike-button"
         type="button"
-        onclick="unlikePost({{ post.id }},{{ post.liked_users.count }})"
+        onclick="unlikePost({{ post.id }})"
       >
         <svg
           aria-label="Unlike"
@@ -161,8 +165,11 @@
       class="col-auto mt-1 home-post-text fw-bold"
       id="likes-count-{{ post.id }}"
     >
-      {% if likes_count > 1 %} {{ post.liked_users.count }} likes {% else %} {{
-      post.liked_users.count }} like {% endif %}
+      {% if likes_count > 1 %}
+      {{ post.liked_users.count }} likes
+      {% else %} 
+      {{ post.liked_users.count }} like
+      {% endif %}
     </div>
     {% endwith %}
   </div>
