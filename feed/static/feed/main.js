@@ -47,3 +47,25 @@ function unlikePost(id) {
   xhr.open("GET", `/unlike/?id=${id}`, false);
   xhr.send();
 }
+
+function openImagePicker() {
+  const input_content = document.getElementById("id_content");
+
+  input_content.onchange = showUploadedImage;
+  input_content.click();
+
+  function showUploadedImage() {
+    const imageholder = document.getElementById("image-holder");
+
+    imageholder.classList.remove("image-upload-item");
+
+    const img = document.createElement("img");
+    img.src = URL.createObjectURL(this.files[0]);
+    img.height = 538;
+    img.width = 538;
+    img.onload = function () {
+      URL.revokeObjectURL(this.src);
+    };
+    imageholder.replaceChild(img, imageholder.childNodes[1]);
+  }
+}

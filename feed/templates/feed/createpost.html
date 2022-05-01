@@ -1,0 +1,47 @@
+{% extends 'feed/base.html' %} {% load widget_tweaks %} {% block content %}
+<div class="container image-upload-container border border-1 p-0">
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% render_field form.content hidden="true" %}
+    <div id="image-holder" class="image-upload-item">
+      <button
+        id="file_selector"
+        class="btn btn-primary"
+        onclick="openImagePicker()"
+      >
+        Select from computer
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock content %}
+{% block sidebar %}
+<div class="container view-post-side-container border border-1 p-0">
+  <div class="row mx-auto align-items-center">
+    <div class="col-auto p-2">
+      <img
+        class="home-post-dp"
+        src="../../static/feed/sample-post-dp.jpg"
+        alt="instaclone-post-dp"
+      />
+    </div>
+    <div class="col-auto home-post-text fw-bold">{{ user.username }}</div>
+  </div>
+  <form action="#" method="post">
+    <div class="row mx-auto">
+      <div class="col p-0">
+        <textarea
+          type="text"
+          class="form-control post-caption-input"
+          placeholder="Add a comment..."
+          aria-label="Add a comment"
+          aria-describedby="post-button"
+        ></textarea>
+      </div>
+      <div class="col-auto my-auto p-0">
+        <a class="btn" type="submit" id="post-button">Post</a>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock sidebar %}

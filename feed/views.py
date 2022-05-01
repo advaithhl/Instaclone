@@ -2,6 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render
 
+from feed.forms import CreatePostForm
+
 from .models import Post
 
 
@@ -9,6 +11,12 @@ from .models import Post
 def main_feed(request):
     posts = Post.objects.filter(creator=request.user.id)
     return render(request, 'feed/home.html', {'posts': posts})
+
+
+@login_required
+def create_post_view(request):
+    form = CreatePostForm()
+    return render(request, 'feed/createpost.html', {'form': form})
 
 
 @login_required

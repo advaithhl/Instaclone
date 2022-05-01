@@ -44,10 +44,9 @@
           <li class="nav-item">
             <a
               class="navbar-text nav-link"
+              href="{% url 'instaclone-create_post_view' %}"
               id="navbarDropdown"
               role="button"
-              data-bs-toggle="modal"
-              data-bs-target="#newPostModal"
             >
               <svg
                 aria-label="New Post"
@@ -91,33 +90,6 @@
               </svg>
             </a>
           </li>
-          <div
-            class="modal fade"
-            id="newPostModal"
-            tabindex="-1"
-            aria-labelledby="newPostLabel"
-            aria-hidden="true"
-          >
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title new-post-modal-text" id="newPostLabel">Create new post</h5>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div class="modal-body">Form to upload new image here</div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">
-                    Next
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
           <li class="nav-item dropdown">
             <a
               class="navbar-text nav-link"

@@ -63,7 +63,7 @@ body {
   color: #8e8e8e;
 }
 
-.like-button:hover >svg {
+.like-button:hover > svg {
   fill: #8e8e8e;
 }
 
@@ -93,6 +93,27 @@ body {
   border: none;
   height: 38px;
   resize: none;
+}
+
+.post-caption-input {
+  box-shadow: none !important;
+  border: none;
+  resize: none;
+}
+
+.image-upload-container {
+  background-color: #ffffff;
+  min-width: 538px;
+  min-height: 538px;
+  position: relative;
+}
+
+.image-upload-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -15px;
+  margin-left: -95px;
 }
 
 #post-button {
