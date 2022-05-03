@@ -56,14 +56,26 @@ function openImagePicker() {
 
   function showUploadedImage() {
     const imageholder = document.getElementById("image-holder");
+    const imageholderparent = document.getElementById("image-holder-parent");
 
     imageholder.classList.remove("image-upload-item");
 
     const img = document.createElement("img");
     img.src = URL.createObjectURL(this.files[0]);
-    img.height = 538;
-    img.width = 538;
     img.onload = function () {
+      const aspect_ratio = img.width / img.height;
+      if (aspect_ratio > 1) {
+        imageholderparent.classList.add("image-holder-parent-landscape");
+        imageholder.classList.add("uploaded-img-holder");
+        img.width = 538;
+      } else if (aspect_ratio == 1) {
+        img.width = img.height = 538;
+      } else if (aspect_ratio < 1) {
+        imageholderparent.classList.add("image-holder-parent-portrait");
+        imageholder.classList.add("uploaded-img-holder");
+        img.height = 538;
+      }
+      imageholderparent.classList.replace("border-danger", "border-dark");
       URL.revokeObjectURL(this.src);
     };
     imageholder.replaceChild(img, imageholder.childNodes[1]);

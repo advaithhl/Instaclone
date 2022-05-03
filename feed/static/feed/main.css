@@ -116,6 +116,22 @@ body {
   margin-left: -95px;
 }
 
+.image-holder-parent-landscape {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.image-holder-parent-portrait {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.uploaded-img-holder {
+  overflow: hidden;
+}
+
 #post-button {
   color: #4193ef;
   display: none;

@@ -1,5 +1,5 @@
 {% extends 'feed/base.html' %} {% load widget_tweaks %} {% block content %}
-<div class="container image-upload-container border border-1 p-0">
+<div id="image-holder-parent" class="container image-upload-container border border-danger p-0">
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {% render_field form.content hidden="true" %}
