@@ -97,6 +97,7 @@ body {
 
 .post-caption-input {
   box-shadow: none !important;
+  height: 434px;
   border: none;
   resize: none;
 }
