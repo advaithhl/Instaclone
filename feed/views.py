@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from feed.forms import CreatePostForm
 
@@ -15,6 +15,14 @@ def main_feed(request):
 
 @login_required
 def create_post_view(request):
+    if request.method == 'POST':
+        form = CreatePostForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_post = form.save(commit=False)
+            new_post.creator = request.user
+            new_post.save()
+            form.save_m2m()
+            return redirect('instaclone-main_feed')
     form = CreatePostForm()
     return render(request, 'feed/createpost.html', {'form': form})
 

@@ -81,3 +81,12 @@ function openImagePicker() {
     imageholder.replaceChild(img, imageholder.childNodes[1]);
   }
 }
+
+function submitPost() {
+  const input_caption = document.getElementById("id_caption");
+  const proxy_input_caption = document.getElementById("proxy_input_caption");
+  const submit_button = document.getElementById("id_submit_button");
+
+  input_caption.value = proxy_input_caption.value;
+  submit_button.click();
+}

@@ -1,8 +1,17 @@
 {% extends 'feed/base.html' %} {% load widget_tweaks %} {% block content %}
-<div id="image-holder-parent" class="container image-upload-container border border-danger p-0">
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
+<div
+  id="image-holder-parent"
+  class="container image-upload-container border border-danger p-0"
+>
+  <form
+    action="{% url 'instaclone-create_post_view' %}"
+    method="post"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %} 
     {% render_field form.content hidden="true" %}
+    {%render_field form.caption hidden="true" %}
+    <button id="id_submit_button" type="submit" hidden="true"></button>
     <div id="image-holder" class="image-upload-item">
       <button
         id="file_selector"
@@ -28,6 +37,7 @@
     <div class="col-auto home-post-text fw-bold">{{ user.username }}</div>
   </div>
   <textarea
+    id="proxy_input_caption"
     type="text"
     class="form-control post-caption-input"
     placeholder="Write a caption..."
@@ -36,6 +46,13 @@
   ></textarea>
 </div>
 <div class="d-grid mt-2 gap-2 col-12 mx-auto">
-  <button class="btn btn-success" type="submit">Post</button>
+  <button
+    id="proxy_submit_button"
+    class="btn btn-success"
+    type="button"
+    onclick="submitPost()"
+  >
+    Post
+  </button>
 </div>
 {% endblock sidebar %}
