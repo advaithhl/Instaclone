@@ -131,6 +131,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # The default login URL
 LOGIN_URL = 'instaclone-accounts_login'
 
+# The height and width of square images in pixels
+IMAGE_SIZE = 538
+
 # Media directory
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
