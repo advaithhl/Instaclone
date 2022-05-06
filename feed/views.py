@@ -26,7 +26,7 @@ def create_post_view(request):
             new_post.creator = request.user
             new_post.save()
             form.save_m2m()
-            return redirect('instaclone-main_feed')
+            return redirect('instaclone-post_view', new_post.id)
     form = CreatePostForm()
     return render(request, 'feed/createpost.html', {'form': form})
 
