@@ -7,6 +7,10 @@ from feed.forms import CreatePostForm
 from .models import Post
 
 
+def redirect_to_feed(request):
+    return redirect('instaclone-main_feed')
+
+
 @login_required
 def main_feed(request):
     posts = Post.objects.filter(creator=request.user.id)
@@ -28,9 +32,8 @@ def create_post_view(request):
 
 
 @login_required
-def post_view(request):
-    post_id = request.GET['id']
-    post = Post.objects.filter(id=post_id).first()
+def post_view(request, pk):
+    post = Post.objects.filter(id=pk).first()
     return render(request, 'feed/viewpost.html', {'post': post})
 
 
