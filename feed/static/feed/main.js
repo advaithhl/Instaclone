@@ -77,6 +77,9 @@ function openImagePicker() {
       }
       imageholderparent.classList.replace("border-danger", "border-dark");
       URL.revokeObjectURL(this.src);
+
+      const post_button = document.getElementById("proxy_submit_button");
+      post_button.removeAttribute("disabled");
     };
     imageholder.replaceChild(img, imageholder.childNodes[1]);
   }

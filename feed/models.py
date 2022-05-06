@@ -12,7 +12,7 @@ def _user_content_dir(instance, filename):
 class Post(models.Model):
     creator = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='posts')
-    caption = models.CharField(max_length=512)
+    caption = models.CharField(max_length=512, blank=True)
     liked_users = models.ManyToManyField(
         User, related_name='likes', blank=True)
     time_created = models.DateTimeField(default=timezone.now)
