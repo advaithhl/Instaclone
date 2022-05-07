@@ -2,8 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 
-from feed.forms import CreatePostForm
-
+from .forms import CreateCommentForm, CreatePostForm
 from .models import Post
 
 
@@ -34,7 +33,15 @@ def create_post_view(request):
 @login_required
 def post_view(request, pk):
     post = Post.objects.filter(id=pk).first()
-    return render(request, 'feed/viewpost.html', {'post': post})
+    blank_form = CreateCommentForm()
+    if request.method == 'POST':
+        form = CreateCommentForm(request.POST)
+        if form.is_valid():
+            new_comment = form.save(commit=False)
+            new_comment.author = request.user
+            new_comment.post = post
+            new_comment.save()
+    return render(request, 'feed/viewpost.html', {'post': post, 'form': blank_form})
 
 
 @login_required

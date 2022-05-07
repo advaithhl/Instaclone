@@ -1,4 +1,4 @@
-{% extends 'feed/base.html' %} {% block content %}
+{% extends 'feed/base.html' %} {% load widget_tweaks %} {% block content %}
 {% load date_formats %}
 <div class="d-lg-none">
   <div class="row mx-auto align-items-center">
@@ -177,19 +177,29 @@
     </div>
   </div>
   <!-- End time posted -->
-  <form action="#" method="post">
+  <form action="{% url 'instaclone-post_view' post.id %}" method="post">
+    {% csrf_token %}
     <div class="row mx-auto">
       <div class="col p-0">
         <textarea
+          id="proxy_input_text"
           type="text"
           class="form-control comment-create-input"
           placeholder="Add a comment..."
           aria-label="Add a comment"
           aria-describedby="post-button"
         ></textarea>
+        {% render_field form.text hidden="true" %}
       </div>
       <div class="col-auto my-auto p-0">
-        <a class="btn" type="submit" id="post-button">Post</a>
+        <button
+          onclick="submitComment()"
+          class="btn"
+          type="submit"
+          id="post-button"
+        >
+          Post
+        </button>
       </div>
     </div>
   </form>

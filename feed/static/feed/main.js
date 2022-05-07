@@ -93,3 +93,12 @@ function submitPost() {
   input_caption.value = proxy_input_caption.value;
   submit_button.click();
 }
+
+function submitComment() {
+  const input_text = document.getElementById("id_text");
+  const proxy_input_text = document.getElementById("proxy_input_text");
+  const post_button = document.getElementById("post-button");
+
+  input_text.value = proxy_input_text.value;
+  post_button.click();
+}
