@@ -32,10 +32,15 @@
         alt="instaclone-post-dp"
       />
     </div>
-    <div class="col-auto home-post-text fw-bold">
+    <div class="col home-post-text fw-bold">
       {{ post.creator.username }}
     </div>
-  </div>
+    <div class="col-auto">
+      <button type="button" class="btn btn-outline-dark shadow-none" data-bs-toggle="modal" data-bs-target="#postModal">
+        ...
+      </button>
+    </div>
+    {% include 'feed/modals/viewpost_post_modal.html' %}
   <hr class="hr-no-margin" />
   <div class="mt-2 view-post-comments-box">
     <div class="row mx-auto">
