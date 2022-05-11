@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 
 from .forms import CreateCommentForm, CreatePostForm
+from .modals import PostModal
 from .models import Post
 
 
@@ -33,7 +34,13 @@ def create_post_view(request):
 @login_required
 def post_view(request, pk):
     post = Post.objects.filter(id=pk).first()
+    modal = PostModal(iscreator=(post.creator == request.user))
     blank_form = CreateCommentForm()
+    context = {
+        'post': post,
+        'form': blank_form,
+        'modal': modal,
+    }
     if request.method == 'POST':
         form = CreateCommentForm(request.POST)
         if form.is_valid():
@@ -41,7 +48,7 @@ def post_view(request, pk):
             new_comment.author = request.user
             new_comment.post = post
             new_comment.save()
-    return render(request, 'feed/viewpost.html', {'post': post, 'form': blank_form})
+    return render(request, 'feed/viewpost.html', context)
 
 
 @login_required

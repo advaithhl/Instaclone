@@ -1,10 +1,21 @@
-<div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="postModal"
+  tabindex="-1"
+  aria-labelledby="postModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-body p-0">
         <div class="d-grid">
-          <button class="btn btn-outline-dark" style="border-radius: 0%; border-color: blueviolet;" type="button">Edit</button>
-          <button class="btn btn-outline-danger" style="border-radius: 0%; border-color: red;" type="button">Delete</button>
+          {% for btn in modal.items %}
+            <a
+              class="modal-button shadow-none {{ btn.text_style }} btn btn{{ btn.outline }}{{ btn.color }}"
+              href="{{ btn.link }}"
+              type="button"
+            >{{ btn.text }}</a>
+          {% endfor %}
         </div>
       </div>
     </div>
