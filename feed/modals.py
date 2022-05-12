@@ -22,9 +22,8 @@ class Modal(ABC):
         pass
 
     @property
-    @abstractmethod
     def items(self):
-        pass
+        return self.auth_items if self.iscreator else self.non_auth_items
 
     def __init__(self, iscreator):
         super().__init__()
@@ -91,7 +90,3 @@ class PostModal(Modal):
     @property
     def non_auth_items(self):
         return self._non_creator_items
-
-    @property
-    def items(self):
-        return self.auth_items if self.iscreator else self.non_auth_items
