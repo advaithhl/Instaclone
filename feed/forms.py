@@ -15,6 +15,16 @@ class CreatePostForm(forms.ModelForm):
         ]
 
 
+class EditPostForm(forms.ModelForm):
+    caption = forms.CharField(max_length=512, required=False)
+
+    class Meta:
+        model = Post
+        fields = [
+            'caption',
+        ]
+
+
 class CreateCommentForm(forms.ModelForm):
     text = forms.CharField(widget=forms.Textarea)
 

@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 
-from .forms import CreateCommentForm, CreatePostForm
+from .forms import CreateCommentForm, CreatePostForm, EditPostForm
 from .modals import PostModal
 from .models import Post
 
@@ -29,6 +29,18 @@ def create_post_view(request):
             return redirect('instaclone-post_view', new_post.id)
     form = CreatePostForm()
     return render(request, 'feed/createpost.html', {'form': form})
+
+
+@login_required
+def edit_post_view(request, pk):
+    post = Post.objects.filter(id=pk).first()
+    if request.method == 'POST':
+        form = EditPostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('instaclone-post_view', post.id)
+    form = EditPostForm(instance=post)
+    return render(request, 'feed/editpost.html', {'form': form, 'post': post})
 
 
 @login_required

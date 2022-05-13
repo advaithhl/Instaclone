@@ -1,0 +1,64 @@
+{% extends 'feed/base.html' %} {% load widget_tweaks %} {% block content %}
+{% load date_formats %}
+<div class="d-lg-none">
+  <div class="row mx-auto align-items-center">
+    <div class="col-auto p-2">
+      <img
+        class="home-post-dp"
+        src="../../static/feed/sample-post-dp.jpg"
+        alt="instaclone-post-dp"
+      />
+    </div>
+    <div class="col-auto home-post-text fw-bold">
+      {{ post.creator.username }}
+    </div>
+  </div>
+</div>
+<div class="container p-0">
+  <img
+    class="large-post-img"
+    src="{{ post.content.url }}"
+    alt="instaclone-image"
+  />
+</div>
+{% endblock content %}
+{% block sidebar %}
+<div class="container view-post-side-container border border-1 p-0">
+  <div class="row mx-auto align-items-center">
+    <div class="col-auto p-2">
+      <img
+        class="home-post-dp"
+        src="../../static/feed/sample-post-dp.jpg"
+        alt="instaclone-post-dp"
+      />
+    </div>
+    <div class="col-auto home-post-text fw-bold">
+      {{ post.creator.username }}
+    </div>
+  </div>
+  <textarea
+    id="proxy_input_caption"
+    type="text"
+    class="form-control post-caption-input"
+    placeholder="Write a caption..."
+    aria-label="Write a caption"
+    aria-describedby="post-button"
+    autofocus
+  >{{ post.caption }}</textarea>
+</div>
+<form action="{% url 'instaclone-edit_post_view' post.id %}" method="post">
+  {% csrf_token %}
+  {%render_field form.caption hidden="true" %}
+  <button id="id_submit_button" type="submit" hidden="true"></button>
+  <div class="d-grid mt-2 gap-2 col-12 mx-auto">
+    <button
+      id="proxy_edit_button"
+      class="btn btn-primary"
+      type="button"
+      onclick="submitPost()"
+    >
+      Edit post
+    </button>
+  </div>
+</form>
+{% endblock sidebar %}
