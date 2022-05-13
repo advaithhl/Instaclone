@@ -34,13 +34,15 @@ def create_post_view(request):
 @login_required
 def edit_post_view(request, pk):
     post = Post.objects.filter(id=pk).first()
-    if request.method == 'POST':
-        form = EditPostForm(request.POST, instance=post)
-        if form.is_valid():
-            form.save()
-            return redirect('instaclone-post_view', post.id)
-    form = EditPostForm(instance=post)
-    return render(request, 'feed/editpost.html', {'form': form, 'post': post})
+    if request.user == post.creator:
+        if request.method == 'POST':
+            form = EditPostForm(request.POST, instance=post)
+            if form.is_valid():
+                form.save()
+                return redirect('instaclone-post_view', post.id)
+        form = EditPostForm(instance=post)
+        return render(request, 'feed/editpost.html', {'form': form, 'post': post})
+    return redirect('instaclone-post_view', pk=pk)
 
 
 @login_required
