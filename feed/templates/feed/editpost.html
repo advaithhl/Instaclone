@@ -50,15 +50,27 @@
   {% csrf_token %}
   {%render_field form.caption hidden="true" %}
   <button id="id_submit_button" type="submit" hidden="true"></button>
-  <div class="d-grid mt-2 gap-2 col-12 mx-auto">
-    <button
-      id="proxy_edit_button"
-      class="btn btn-primary"
-      type="button"
-      onclick="submitPost()"
-    >
-      Edit post
-    </button>
+  <div class="row mt-2 mx-auto">
+    <div class="d-grid col">
+      <button
+        id="proxy_edit_button"
+        class="btn btn-success"
+        type="button"
+        onclick="submitPost()"
+      >
+        Save changes
+      </button>
+    </div>
+    <div class="d-grid col">
+      <a
+        id="discard_button"
+        class="btn btn-danger"
+        type="button"
+        href="{% url 'instaclone-post_view' post.id %}"
+      >
+        Discard
+      </a>
+    </div>
   </div>
 </form>
 {% endblock sidebar %}
