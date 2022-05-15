@@ -38,12 +38,14 @@ class Button:
         text='Button',
         text_style=None,
         link='#',
+        has_child_modal=False,
     ):
         self._outline = outline
         self._color = color
         self._text = text
         self._text_style = text_style
         self._link = link
+        self._has_child_modal = has_child_modal
 
     @property
     def outline(self):
@@ -65,6 +67,10 @@ class Button:
     def link(self):
         return self._link
 
+    @property
+    def has_child_modal(self):
+        return self._has_child_modal
+
     def __repr__(self):
         return f'{self.text} button'
 
@@ -73,11 +79,34 @@ class PostModal(Modal):
     _creator_items = (
         Button(text='Edit'),
         Button(text='Copy link', color=Modal.SUCCESS),
-        Button(text='Delete', color=Modal.DANGER),
+        Button(text='Delete', color=Modal.DANGER,
+               link='#deleteConfirmation', has_child_modal=True),
     )
 
     _non_creator_items = (
         Button(text='Copy link', color=Modal.SUCCESS),
+    )
+
+    def __init__(self, iscreator=False):
+        super().__init__(iscreator=iscreator)
+
+    @property
+    def auth_items(self):
+        return self._creator_items
+
+    @property
+    def non_auth_items(self):
+        return self._non_creator_items
+
+
+class DeletePostModal(Modal):
+    _creator_items = (
+        Button(text='Yes, delete this post', color=Modal.DANGER),
+        Button(text='Cancel'),
+    )
+
+    _non_creator_items = (
+        Button(text='Cancel'),
     )
 
     def __init__(self, iscreator=False):

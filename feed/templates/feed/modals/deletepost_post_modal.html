@@ -1,0 +1,35 @@
+<div
+  class="modal fade"
+  id="deleteConfirmation"
+  tabindex="-1"
+  aria-labelledby="deleteConfirmationLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="container">
+          <div class="d-flex justify-content-center">
+            <p class="h4 my-2">Delete post?</p>
+          </div>
+          <div class="d-flex justify-content-center">
+            <p class="text-muted mt-2 mb-0">
+              Are you sure you want to delete this post?
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body p-0">
+        <div class="d-grid">
+          {% for btn in delete_post_modal.items %}
+            <a
+              class="modal-button shadow-none {{ btn.text_style }} btn btn{{ btn.outline }}{{ btn.color }}"
+              href="{{ btn.link }}"
+              type="button"
+            >{{ btn.text }}</a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

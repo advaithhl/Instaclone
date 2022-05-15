@@ -14,6 +14,10 @@
               class="modal-button shadow-none {{ btn.text_style }} btn btn{{ btn.outline }}{{ btn.color }}"
               href="{{ btn.link }}"
               type="button"
+              {% if btn.has_child_modal %}
+              data-bs-dismiss="modal"
+              data-bs-toggle="modal"
+              {% endif %}
             >{{ btn.text }}</a>
           {% endfor %}
         </div>

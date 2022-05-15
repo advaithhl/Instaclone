@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 
 from .forms import CreateCommentForm, CreatePostForm, EditPostForm
-from .modals import PostModal
+from .modals import DeletePostModal, PostModal
 from .models import Post
 
 
@@ -49,11 +49,14 @@ def edit_post_view(request, pk):
 def post_view(request, pk):
     post = Post.objects.filter(id=pk).first()
     modal = PostModal(iscreator=(post.creator == request.user))
+    delete_post_modal = DeletePostModal(
+        iscreator=(post.creator == request.user))
     blank_form = CreateCommentForm()
     context = {
         'post': post,
         'form': blank_form,
         'modal': modal,
+        'delete_post_modal': delete_post_modal
     }
     if request.method == 'POST':
         form = CreateCommentForm(request.POST)
