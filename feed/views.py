@@ -1,10 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
+from django.urls import reverse
 
 from .forms import CreateCommentForm, CreatePostForm, EditPostForm
-from .modals import DeletePostModal, PostModal
+from .modals import PostModal
 from .models import Post
+from .utils import get_delete_post_modal
 
 
 def redirect_to_feed(request):
@@ -48,9 +50,10 @@ def edit_post_view(request, pk):
 @login_required
 def post_view(request, pk):
     post = Post.objects.filter(id=pk).first()
-    modal = PostModal(iscreator=(post.creator == request.user))
-    delete_post_modal = DeletePostModal(
-        iscreator=(post.creator == request.user))
+    _is_creator = post.creator == request.user
+    modal = PostModal(iscreator=_is_creator)
+    delete_post_modal = get_delete_post_modal(post.id,
+                                              iscreator=_is_creator)
     blank_form = CreateCommentForm()
     context = {
         'post': post,
@@ -66,6 +69,15 @@ def post_view(request, pk):
             new_comment.post = post
             new_comment.save()
     return render(request, 'feed/viewpost.html', context)
+
+
+@login_required
+def delete_post_view(request, pk):
+    # TODO: Make posts delete only on POST.
+    post = Post.objects.filter(id=pk).first()
+    if request.user == post.creator:
+        post.delete()
+    return redirect('instaclone-main_feed')
 
 
 @login_required

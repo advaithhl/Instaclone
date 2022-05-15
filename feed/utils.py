@@ -1,5 +1,8 @@
 from django.conf import settings
+from django.urls import reverse
 from PIL import Image
+
+from .modals import DeletePostModal
 
 
 def pad_image(image_content, imagesize=settings.IMAGE_SIZE):
@@ -25,3 +28,10 @@ def pad_image(image_content, imagesize=settings.IMAGE_SIZE):
         background_img.paste(resized_img, offset)
     image_content.close()
     return background_img
+
+
+def get_delete_post_modal(pk, iscreator):
+    delete_post_modal = DeletePostModal(iscreator)
+    delete_link = reverse('instaclone-delete_post_view', kwargs={'pk': pk})
+    delete_post_modal._creator_items[0]._link = delete_link
+    return delete_post_modal
