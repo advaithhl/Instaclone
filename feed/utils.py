@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.urls import reverse
-from PIL import Image
+from PIL import Image, ImageOps
 
 from .modals import DeletePostModal
 
@@ -20,6 +20,7 @@ def pad_image(image_content, imagesize=settings.IMAGE_SIZE):
             resized_img_width = resized_img_height * img_ar
         resized_img = img.resize(
             (int(resized_img_width), int(resized_img_height)))
+        resized_img = ImageOps.exif_transpose(resized_img)
     with Image.new(
             'RGB',
             (imagesize, imagesize), (255, 255, 255, 255)) as background_img:
