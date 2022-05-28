@@ -5,7 +5,7 @@ from .models import Comment, Post
 
 class CreatePostForm(forms.ModelForm):
     content = forms.ImageField()
-    caption = forms.CharField(max_length=512, required=False)
+    caption = forms.CharField(max_length=512, required=False, strip=False)
 
     class Meta:
         model = Post
@@ -16,7 +16,7 @@ class CreatePostForm(forms.ModelForm):
 
 
 class EditPostForm(forms.ModelForm):
-    caption = forms.CharField(max_length=512, required=False)
+    caption = forms.CharField(max_length=512, required=False, strip=False)
 
     class Meta:
         model = Post

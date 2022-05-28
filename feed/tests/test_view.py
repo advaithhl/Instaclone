@@ -70,7 +70,7 @@ class TestCreatePostView:
         assert b'form' in response.content
 
     def test_post(self, default_image):
-        caption = random_string(512)
+        caption = '  ' + random_string(508) + '  '
         data = {
             'content': default_image,
             'caption': caption
@@ -91,7 +91,7 @@ class TestCreatePostView:
         assert created_post.liked_users.all().count() == 0
 
     def test_horizontal_picture(self, horizontal_image):
-        caption = random_string(512)
+        caption = '  ' + random_string(508) + '  '
         data = {
             'content': horizontal_image,
             'caption': caption
@@ -112,7 +112,7 @@ class TestCreatePostView:
         assert created_post.liked_users.all().count() == 0
 
     def test_vertical_picture(self, vertical_image):
-        caption = random_string(512)
+        caption = '  ' + random_string(508) + '  '
         data = {
             'content': vertical_image,
             'caption': caption
@@ -170,7 +170,7 @@ class TestEditPostView:
         logger.debug(f'All posts queryset is {Post.objects.all()}')
 
         original_caption = post.caption
-        new_caption = random_string(512)
+        new_caption = '  ' + random_string(508) + '  '
         logger.debug(
             f'Randomly generated string being set as the new caption is {new_caption}')
         data = {
@@ -212,7 +212,7 @@ class TestEditPostView:
         logger.info(f'Mixer created post has creator {post.creator}')
         logger.debug(f'All posts queryset is {Post.objects.all()}')
 
-        new_caption = random_string(512)
+        new_caption = '  ' + random_string(508) + '  '
         logger.debug(
             f'Randomly generated string being set as the new caption is {new_caption}')
         data = {
@@ -239,7 +239,7 @@ class TestEditPostView:
         logger.info(f'Mixer created post has creator {post.creator}')
         logger.debug(f'All posts queryset is {Post.objects.all()}')
 
-        new_caption = random_string(513)
+        new_caption = '  ' + random_string(508) + '  '
         logger.debug(f'Randomly generated caption has length {len(new_caption)}')
         data = {
             'caption': new_caption,
