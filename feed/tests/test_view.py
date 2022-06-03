@@ -3,6 +3,7 @@ import logging
 import pytest
 from django.conf import settings
 from django.contrib.auth.models import AnonymousUser, User
+from django.core.exceptions import ObjectDoesNotExist
 from django.test import RequestFactory
 from django.urls import reverse
 from feed import views
@@ -186,8 +187,8 @@ class TestEditPostView:
         response = views.edit_post_view(request, pk=post.id)
         assert response.status_code == 302
         assert response.url == f'{reverse("instaclone-post_view", kwargs={"pk": post.id})}'
-        post.refresh_from_db()
         assert post.caption != new_caption
+        post.refresh_from_db()
         assert post.caption == original_caption
 
     def test_edit_by_creator_get(self):
@@ -240,7 +241,8 @@ class TestEditPostView:
         logger.debug(f'All posts queryset is {Post.objects.all()}')
 
         new_caption = '  ' + random_string(508) + '  '
-        logger.debug(f'Randomly generated caption has length {len(new_caption)}')
+        logger.debug(
+            f'Randomly generated caption has length {len(new_caption)}')
         data = {
             'caption': new_caption,
         }
@@ -252,3 +254,173 @@ class TestEditPostView:
         response = views.edit_post_view(request, pk=post.id)
         assert response.status_code == 302
         assert response.url == f'{reverse("instaclone-post_view", kwargs={"pk": post.id})}'
+
+
+@pytest.mark.django_db
+class TestViewPostView:
+    def test_anonymous(self):
+        request = RequestFactory().get(
+            reverse('instaclone-post_view', kwargs={'pk': '1'}))
+        request.user = AnonymousUser()
+        response = views.post_view(request)
+        logger.info(f'Redirect URL is {response.url}')
+        assert response.status_code == 302
+        assert response.url == f'{reverse(settings.LOGIN_URL)}?next={reverse("instaclone-post_view", kwargs={"pk": "1"})}'
+
+    def test_view_by_non_creator_get(self):
+        post = mixer.blend(Post)
+        logger.info(f'Mixer created post is {post}')
+        logger.debug(f'Mixer created post has id {post.id}')
+        logger.debug(f'Mixer created post has caption {post.caption}')
+        logger.debug(f'Mixer created post has creator {post.creator}')
+        logger.debug(f'All posts queryset is {Post.objects.all()}')
+        non_creator = mixer.blend(User)
+        logger.info(f'Mixer created new user is {non_creator}')
+        request = RequestFactory().get(
+            reverse('instaclone-post_view', kwargs={'pk': '1'}))
+        request.user = non_creator
+        response = views.post_view(request, pk=post.id)
+        assert response.status_code == 200
+
+    def test_view_by_creator_get(self):
+        post = mixer.blend(Post)
+        logger.info(f'Mixer created post is {post}')
+        logger.debug(f'Mixer created post has id {post.id}')
+        logger.debug(f'Mixer created post has caption {post.caption}')
+        logger.debug(f'Mixer created post has creator {post.creator}')
+        logger.debug(f'All posts queryset is {Post.objects.all()}')
+        creator = post.creator
+        logger.debug(f'Using user as creator {creator}')
+        request = RequestFactory().get(
+            reverse('instaclone-post_view', kwargs={'pk': '1'}))
+        request.user = creator
+        response = views.post_view(request, pk=post.id)
+        assert response.status_code == 200
+
+    def test_view_by_non_creator_post_comment_create(self):
+        post = mixer.blend(Post)
+        logger.info(f'Mixer created post is {post}')
+        logger.debug(f'Mixer created post has id {post.id}')
+        logger.debug(f'Mixer created post has caption {post.caption}')
+        logger.debug(f'Mixer created post has creator {post.creator}')
+        logger.debug(f'All posts queryset is {Post.objects.all()}')
+        non_creator = mixer.blend(User)
+        logger.info(f'Mixer created new user is {non_creator}')
+
+        new_comment = '  ' + random_string(252) + '  '
+        logger.debug(
+            f'Randomly generated string being added as the new comment is {new_comment}')
+        data = {
+            'text': new_comment
+        }
+        request = RequestFactory().post(
+            reverse('instaclone-post_view', kwargs={'pk': '1'}),
+            data=data,
+        )
+        request.user = non_creator
+        logger.debug(
+            f'All comments to post with id {post.id} is {post.comment_set.all()}')
+        response = views.post_view(request, pk=post.id)
+        assert response.status_code == 200
+        post.refresh_from_db()
+        logger.debug(
+            f'All comments to post with id {post.id} is {post.comment_set.all()}')
+        assert post.comment_set.count() == 1
+        new_comment_db = post.comment_set.first()
+        logger.debug(f'New comment is {new_comment_db}')
+        assert new_comment_db.author == non_creator
+        assert new_comment_db.post == post
+
+    def test_view_by_creator_post_comment_create(self):
+        post = mixer.blend(Post)
+        logger.info(f'Mixer created post is {post}')
+        logger.debug(f'Mixer created post has id {post.id}')
+        logger.debug(f'Mixer created post has caption {post.caption}')
+        logger.debug(f'Mixer created post has creator {post.creator}')
+        logger.debug(f'All posts queryset is {Post.objects.all()}')
+
+        new_comment = '  ' + random_string(252) + '  '
+        logger.debug(
+            f'Randomly generated string being added as the new comment is {new_comment}')
+        data = {
+            'text': new_comment
+        }
+        request = RequestFactory().post(
+            reverse('instaclone-post_view', kwargs={'pk': '1'}),
+            data=data,
+        )
+        request.user = post.creator
+        logger.debug(
+            f'All comments to post with id {post.id} is {post.comment_set.all()}')
+        response = views.post_view(request, pk=post.id)
+        assert response.status_code == 200
+        post.refresh_from_db()
+        logger.debug(
+            f'All comments to post with id {post.id} is {post.comment_set.all()}')
+        assert post.comment_set.count() == 1
+        new_comment_db = post.comment_set.first()
+        logger.debug(f'New comment is {new_comment_db}')
+        assert new_comment_db.author == post.creator
+        assert new_comment_db.post == post
+
+
+@pytest.mark.django_db
+class TestDeletePostView:
+    def test_anonymous(self):
+        post = mixer.blend(Post)
+        logger.info(f'Mixer created post is {post}')
+        logger.debug(f'Mixer created post has id {post.id}')
+        logger.debug(f'Mixer created post has caption {post.caption}')
+        logger.debug(f'Mixer created post has creator {post.creator}')
+        logger.debug(f'All posts queryset is {Post.objects.all()}')
+        assert Post.objects.count() == 1
+        request = RequestFactory().get(
+            reverse('instaclone-delete_post_view', kwargs={'pk': '1'}))
+        request.user = AnonymousUser()
+        response = views.delete_post_view(request)
+        logger.info(f'Redirect URL is {response.url}')
+        assert response.status_code == 302
+        assert response.url == f'{reverse(settings.LOGIN_URL)}?next={reverse("instaclone-delete_post_view", kwargs={"pk": "1"})}'
+        post.refresh_from_db()
+        assert Post.objects.count() == 1
+        assert Post.objects.first().id == post.id
+
+    @pytest.mark.test_this
+    def test_delete_post_by_non_creator_get(self):
+        post = mixer.blend(Post)
+        logger.info(f'Mixer created post is {post}')
+        logger.debug(f'Mixer created post has id {post.id}')
+        logger.debug(f'Mixer created post has caption {post.caption}')
+        logger.debug(f'Mixer created post has creator {post.creator}')
+        logger.debug(f'All posts queryset is {Post.objects.all()}')
+        assert Post.objects.count() == 1
+        non_creator = mixer.blend(User)
+        logger.info(f'Mixer created new user is {non_creator}')
+        request = RequestFactory().get(
+            reverse('instaclone-delete_post_view', kwargs={'pk': '1'}))
+        request.user = non_creator
+        response = views.delete_post_view(request, pk=post.id)
+        assert response.status_code == 302
+        assert response.url == reverse('instaclone-main_feed')
+        post.refresh_from_db()
+        assert Post.objects.count() == 1
+        assert Post.objects.first().id == post.id
+
+    def test_delete_post_by_creator_get(self):
+        post = mixer.blend(Post)
+        logger.info(f'Mixer created post is {post}')
+        logger.debug(f'Mixer created post has id {post.id}')
+        logger.debug(f'Mixer created post has caption {post.caption}')
+        logger.debug(f'Mixer created post has creator {post.creator}')
+        logger.debug(f'All posts queryset is {Post.objects.all()}')
+        assert Post.objects.count() == 1
+        creator = post.creator
+        request = RequestFactory().get(
+            reverse('instaclone-delete_post_view', kwargs={'pk': '1'}))
+        request.user = creator
+        response = views.delete_post_view(request, pk=post.id)
+        assert response.status_code == 302
+        assert response.url == reverse('instaclone-main_feed')
+        assert Post.objects.count() == 0
+        with pytest.raises(ObjectDoesNotExist) as post_dne:
+            post.refresh_from_db()
