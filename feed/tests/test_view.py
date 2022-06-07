@@ -385,7 +385,6 @@ class TestDeletePostView:
         assert Post.objects.count() == 1
         assert Post.objects.first().id == post.id
 
-    @pytest.mark.test_this
     def test_delete_post_by_non_creator_get(self):
         post = mixer.blend(Post)
         logger.info(f'Mixer created post is {post}')
