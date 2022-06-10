@@ -50,25 +50,27 @@ def edit_post_view(request, pk):
 @login_required
 def post_view(request, pk):
     post = Post.objects.filter(id=pk).first()
-    _is_creator = post.creator == request.user
-    modal = PostModal(iscreator=_is_creator)
-    delete_post_modal = get_delete_post_modal(post.id,
-                                              iscreator=_is_creator)
-    blank_form = CreateCommentForm()
-    context = {
-        'post': post,
-        'form': blank_form,
-        'modal': modal,
-        'delete_post_modal': delete_post_modal
-    }
-    if request.method == 'POST':
-        form = CreateCommentForm(request.POST)
-        if form.is_valid():
-            new_comment = form.save(commit=False)
-            new_comment.author = request.user
-            new_comment.post = post
-            new_comment.save()
-    return render(request, 'feed/viewpost.html', context)
+    if post:
+        _is_creator = post.creator == request.user
+        modal = PostModal(iscreator=_is_creator)
+        delete_post_modal = get_delete_post_modal(post.id,
+                                                  iscreator=_is_creator)
+        blank_form = CreateCommentForm()
+        context = {
+            'post': post,
+            'form': blank_form,
+            'modal': modal,
+            'delete_post_modal': delete_post_modal
+        }
+        if request.method == 'POST':
+            form = CreateCommentForm(request.POST)
+            if form.is_valid():
+                new_comment = form.save(commit=False)
+                new_comment.author = request.user
+                new_comment.post = post
+                new_comment.save()
+        return render(request, 'feed/viewpost.html', context)
+    return redirect('instaclone-main_feed')
 
 
 @login_required

@@ -363,6 +363,17 @@ class TestViewPostView:
         assert new_comment_db.author == post.creator
         assert new_comment_db.post == post
 
+    def test_invalid_post_id_get(self):
+        request = RequestFactory().get(
+            reverse('instaclone-post_view', kwargs={'pk': '1'}))
+        authenticated_user = mixer.blend(User)
+        logger.info(f'Mixer created new user is {authenticated_user}')
+        request.user = authenticated_user
+        response = views.post_view(request, pk=1)
+        logger.info(f'Redirect URL is {response.url}')
+        assert response.status_code == 302
+        assert response.url == reverse('instaclone-main_feed')
+
 
 @pytest.mark.django_db
 class TestDeletePostView:
