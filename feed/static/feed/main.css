@@ -83,6 +83,13 @@ body {
   font-size: 12px;
 }
 
+.view-post-caption {
+  border: none;
+  outline: none;
+  height: 38px;
+  resize: none;
+}
+
 .view-post-comments-box {
   height: 330px;
   overflow-y: auto;

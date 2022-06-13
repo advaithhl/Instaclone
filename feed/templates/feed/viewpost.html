@@ -54,7 +54,7 @@
       </div>
       <div class="col mt-1 home-post-text">
         <div class="fw-bold">{{ post.creator.username }}</div>
-        {{ post.caption }}
+        <textarea id="id_caption" class="view-post-caption" readonly>{{ post.caption }}</textarea>
         <div class="row mx-auto mb-2">
           <div class="col-auto mt-1 p-0 view-post-muted-text text-muted">
             17h
