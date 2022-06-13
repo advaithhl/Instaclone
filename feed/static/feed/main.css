@@ -84,6 +84,7 @@ body {
 }
 
 .view-post-caption {
+  width: inherit;
   border: none;
   outline: none;
   height: 38px;
