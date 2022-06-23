@@ -4,9 +4,8 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from .forms import CreateCommentForm, CreatePostForm, EditPostForm
-from .modals import PostModal
 from .models import Post
-from .utils import get_delete_post_modal
+from .utils import get_delete_post_modal, get_post_modal
 
 
 def redirect_to_feed(request):
@@ -52,7 +51,7 @@ def post_view(request, pk):
     post = Post.objects.filter(id=pk).first()
     if post:
         _is_creator = post.creator == request.user
-        modal = PostModal(iscreator=_is_creator)
+        modal = get_post_modal(post.id, iscreator=_is_creator)
         delete_post_modal = get_delete_post_modal(post.id,
                                                   iscreator=_is_creator)
         blank_form = CreateCommentForm()
