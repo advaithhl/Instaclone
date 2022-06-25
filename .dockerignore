@@ -1,0 +1,28 @@
+# Exclude pycache.
+**/__pycache__
+
+# Exclude testing.
+*/tests
+.pytest_cache
+pytest.ini
+
+# Exclude SQLite database.
+db.sqlite3
+
+# Exclude media.
+media
+
+# Exclude host-level files/dirs.
+.cache
+.project
+.idea
+.pydevproject
+.idea/workspace.xml
+**/.DS_Store
+.git/
+.gitignore
+.prettierignore
+
+# Exclude docker files.
+Dockerfile
+.dockerignore
