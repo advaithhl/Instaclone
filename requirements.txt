@@ -1,5 +1,6 @@
-Django==4.0.3
 django-widget-tweaks==1.4.12
+Django==4.0.3
+gunicorn==20.1.0
 imgkit==1.2.2
 mixer==7.2.2
 Pillow==9.1.0
