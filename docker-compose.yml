@@ -2,11 +2,28 @@ version: '3'
 
 services:
     web:
-        container_name: 'instaclone_web'
-        build: .
+        container_name: 'django'
+        build:
+            context: .
+            dockerfile: web.Dockerfile
+        volumes:
+            - static:/usr/src/app/static
         ports:
             - "8000:8000"
         environment:
             - INSTACLONE_DJANGO_SECRET_KEY
             - INSTACLONE_DJANGO_DEBUG_MODE
             - TESTMAIL_USER
+            - TESTMAIL_PASSWORD
+    server:
+        container_name: 'nginx'
+        build:
+            context: .
+            dockerfile: server.Dockerfile
+        volumes:
+            - static:/static
+        ports:
+            - "80:80"
+
+volumes:
+    static:

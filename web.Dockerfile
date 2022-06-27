@@ -1,3 +1,4 @@
+# Dockerfile for the Django app and gunicorn app server.
 FROM python:3.10.5-slim-buster
 
 # Create app directory
