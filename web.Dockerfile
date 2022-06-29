@@ -20,4 +20,4 @@ COPY . /usr/src/app/
 EXPOSE 8000
 
 # Run app server
-CMD [ "gunicorn" ]
+ENTRYPOINT [ "./web_init.sh" ]
