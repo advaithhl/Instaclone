@@ -3,9 +3,7 @@ version: '3'
 services:
     web:
         container_name: 'django'
-        build:
-            context: .
-            dockerfile: web.Dockerfile
+        build: instaclone
         volumes:
             - static:/usr/src/app/static
         ports:
@@ -17,9 +15,7 @@ services:
             - TESTMAIL_PASSWORD
     server:
         container_name: 'nginx'
-        build:
-            context: .
-            dockerfile: server.Dockerfile
+        build: nginx
         volumes:
             - static:/static
         ports:

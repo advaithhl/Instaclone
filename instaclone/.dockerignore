@@ -24,6 +24,5 @@ media
 .prettierignore
 
 # Exclude docker files.
-*.Dockerfile
+Dockerfile
 .dockerignore
-docker-compose.yml

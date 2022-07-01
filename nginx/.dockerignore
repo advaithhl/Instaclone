@@ -1,0 +1,6 @@
+# Exclude host-level files/dirs.
+.DS_Store
+
+# Exclude docker files.
+Dockerfile
+.dockerignore
