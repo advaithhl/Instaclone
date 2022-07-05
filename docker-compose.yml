@@ -12,8 +12,8 @@ services:
         environment:
             - INSTACLONE_DJANGO_SECRET_KEY
             - INSTACLONE_DJANGO_DEBUG_MODE
-            - TESTMAIL_USER
-            - TESTMAIL_PASSWORD
+            - INSTACLONE_MAIL_USER
+            - INSTACLONE_MAIL_PASS
     server:
         container_name: 'nginx'
         build: nginx
