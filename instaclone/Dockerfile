@@ -20,4 +20,4 @@ COPY . /usr/src/app/
 EXPOSE 8000
 
 # Run app server
-ENTRYPOINT [ "./web_init.sh" ]
+ENTRYPOINT [ "./docker-entrypoint.sh" ]
