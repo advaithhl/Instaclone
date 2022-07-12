@@ -23,7 +23,7 @@ def send_welcome_mail(firstname, username, email_address):
     """
 
     subject = "Welcome to Instaclone!"
-    from_email = os.getenv('TESTMAIL_USER')
+    from_email = os.getenv('INSTACLONE_MAIL_USER')
     to_email = [email_address]
 
     send_mail(
