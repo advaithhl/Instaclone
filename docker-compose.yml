@@ -27,6 +27,18 @@ services:
         image: rabbitmq
         ports:
             - "5672:5672"
+    celery:
+        container_name: 'celery'
+        build:
+            context: instaclone
+            dockerfile: celery.Dockerfile
+        environment:
+            - INSTACLONE_DJANGO_SECRET_KEY
+            - INSTACLONE_DJANGO_DEBUG_MODE
+            - INSTACLONE_MAIL_USER
+            - INSTACLONE_MAIL_PASS
+        depends_on:
+            - rabbit
 
 volumes:
     static:
