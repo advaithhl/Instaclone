@@ -2,6 +2,14 @@
 
 Instaclone is an attempt to mimic the technicalities of the popular social media app [Instagram][0].
 
+## Table of contents
+
+- [What is Instaclone?](#what-is-instaclone)
+- [What can Instaclone do?](#what-can-instaclone-do)
+- [How does Instaclone do it?](#how-does-instaclone-do-it)
+- [What is Instaclone not?](#what-is-instaclone-not)
+- [Who are behind Instaclone?](#who-are-behind-instaclone)
+
 ## What is Instaclone?
 
 Instaclone is an experiment to better understand how to build, manage, develop, and deploy an understandably complex system like Instagram. Instaclone tries to mimic not only the UI/UX of Instagram, but the backend as well.
