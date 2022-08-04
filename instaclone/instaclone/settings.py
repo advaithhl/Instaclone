@@ -162,3 +162,11 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('INSTACLONE_MAIL_USER')
 EMAIL_HOST_PASSWORD = os.getenv('INSTACLONE_MAIL_PASS')
+
+# Standalone mode is when the Django app runs without any co-applications.
+#
+# This is the preferred mode when running using Django's development server. Of
+# course, this should only be used for development and the environment variable
+# is not set in the Compose file. Not setting the environment variable makes
+# Instaclone assume that other services like celery and RabbitMQ exist.
+STANDALONE = os.getenv('INSTACLONE_DJANGO_STANDALONE', False) == 'standalone'
