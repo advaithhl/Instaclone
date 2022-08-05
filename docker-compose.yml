@@ -7,8 +7,6 @@ services:
         volumes:
             - static:/usr/src/app/static
             - media:/usr/src/app/media
-        ports:
-            - "8000:8000"
         environment:
             - INSTACLONE_DJANGO_SECRET_KEY
             - INSTACLONE_DJANGO_DEBUG_MODE
