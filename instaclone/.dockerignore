@@ -25,4 +25,5 @@ media
 
 # Exclude docker files.
 Dockerfile
+*.Dockerfile
 .dockerignore
