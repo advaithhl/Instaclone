@@ -31,6 +31,7 @@ DEBUG = os.getenv('INSTACLONE_DJANGO_DEBUG_MODE', False) == 'debug'
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
+    'localhost',
 ]
 
 if DEBUG:
@@ -39,6 +40,7 @@ if DEBUG:
     ]
     CSRF_TRUSTED_ORIGINS = [
         'http://127.0.0.1',
+        'http://localhost',
     ]
 
 # Application definition
