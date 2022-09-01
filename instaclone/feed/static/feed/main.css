@@ -141,7 +141,7 @@ body {
   overflow: hidden;
 }
 
-#post-button {
+.post-button {
   color: #4193ef;
   display: none;
   font-size: 14px;

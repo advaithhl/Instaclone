@@ -8,9 +8,9 @@ $(document).ready(function () {
 
   $("textarea.comment-create-input").on({
     "input propertychange": function () {
-      $("#post-button").hide();
+      $("button.post-button").hide();
       if (this.value.length) {
-        $("#post-button").show();
+        $("button.post-button").show();
         this.style.height = "auto";
         this.style.height = this.scrollHeight + "px";
       } else {
@@ -95,10 +95,19 @@ function submitPost() {
 }
 
 function submitComment() {
+  // This code is kinda sloppy, must be fixed after the interface redesign :(
   const input_text = document.getElementById("id_text");
-  const proxy_input_text = document.getElementById("proxy_input_text");
-  const post_button = document.getElementById("post-button");
+  const proxy_input_text1 = document.getElementById("proxy_input_text1");
+  const proxy_input_text2 = document.getElementById("proxy_input_text2");
+  const post_button = document.getElementsByClassName("post-button")[0];
 
-  input_text.value = proxy_input_text.value;
-  post_button.click();
+  if (proxy_input_text1.value == "") {
+    if (proxy_input_text2.value != "") {
+      input_text.value = proxy_input_text2.value;
+      post_button.click();
+    }
+  } else {
+    input_text.value = proxy_input_text1.value;
+    post_button.click();
+  }
 }
