@@ -31,6 +31,10 @@ def pad_image(image_content, imagesize=settings.IMAGE_SIZE):
     return background_img
 
 
+def get_like_count_text(count):
+    return f'{count} likes' if count != 1 else f'{count} like'
+
+
 def get_post_modal(pk, iscreator):
     post_modal = PostModal(iscreator=iscreator)
     edit_link = reverse('instaclone-edit_post_view', kwargs={'pk': pk})

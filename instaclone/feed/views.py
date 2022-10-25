@@ -5,7 +5,7 @@ from django.urls import reverse
 
 from .forms import CreateCommentForm, CreatePostForm, EditPostForm
 from .models import Post
-from .utils import get_delete_post_modal, get_post_modal
+from .utils import get_delete_post_modal, get_like_count_text, get_post_modal
 
 
 def redirect_to_feed(request):
@@ -87,7 +87,13 @@ def like_view(request):
     post_id = request.GET['id']
     post = Post.objects.filter(id=post_id).first()
     post.liked_users.add(user)
-    return JsonResponse({'status': 'ok'})
+    count = post.liked_users.count()
+    text = get_like_count_text(count)
+    return JsonResponse({
+        'status': 'ok',
+        'count': count,
+        'text': text
+    })
 
 
 @login_required
@@ -96,4 +102,10 @@ def unlike_view(request):
     post_id = request.GET['id']
     post = Post.objects.filter(id=post_id).first()
     post.liked_users.remove(user)
-    return JsonResponse({'status': 'ok'})
+    count = post.liked_users.count()
+    text = get_like_count_text(count)
+    return JsonResponse({
+        'status': 'ok',
+        'count': count,
+        'text': text
+    })

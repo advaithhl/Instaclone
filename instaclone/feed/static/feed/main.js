@@ -24,28 +24,33 @@ function getLikesCountString(newCount) {
   return `${newCount} ${newCount != 1 ? "likes" : "like"}`;
 }
 
+function likeOrUnlikeAJAX(action, id) {
+  const xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      update_text = JSON.parse(xhr.response).text;
+      $(`#likes-count-${id}`).text(update_text);
+    }
+  };
+  if (action == "+") {
+    xhr.open("GET", `/like/?id=${id}`, false);
+    xhr.send();
+  } else if (action == "-") {
+    xhr.open("GET", `/unlike/?id=${id}`, false);
+    xhr.send();
+  }
+}
+
 function likePost(id) {
   $(`#like-div-${id}`).hide();
   $(`#unlike-div-${id}`).show();
-  $(`#likes-count-${id}`).text((_, currentContent) => {
-    let currentCount = parseInt(currentContent.trim().split(" ")[0]);
-    return getLikesCountString(currentCount + 1);
-  });
-  const xhr = new XMLHttpRequest();
-  xhr.open("GET", `/like/?id=${id}`, false);
-  xhr.send();
+  likeOrUnlikeAJAX("+", id);
 }
 
 function unlikePost(id) {
   $(`#unlike-div-${id}`).hide();
   $(`#like-div-${id}`).show();
-  $(`#likes-count-${id}`).text((_, currentContent) => {
-    let currentCount = parseInt(currentContent.trim().split(" ")[0]);
-    return getLikesCountString(currentCount - 1);
-  });
-  const xhr = new XMLHttpRequest();
-  xhr.open("GET", `/unlike/?id=${id}`, false);
-  xhr.send();
+  likeOrUnlikeAJAX("-", id);
 }
 
 function openImagePicker() {
