@@ -6,6 +6,7 @@ body {
   color: black;
   font-family: "Cookie", cursive;
   font-size: xx-large;
+  margin: auto;
 }
 
 .navbar-dark .navbar-nav .nav-link,
