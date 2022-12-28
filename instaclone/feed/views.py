@@ -15,7 +15,7 @@ def redirect_to_feed(request):
 @login_required
 def main_feed(request):
     posts = Post.objects.filter(creator=request.user.id)
-    return render(request, 'feed/home.html', {'posts': posts})
+    return render(request, 'feed/home.html', {'posts': posts, 'navbar_active_home': 'active'})
 
 
 @login_required
@@ -29,7 +29,7 @@ def create_post_view(request):
             form.save_m2m()
             return redirect('instaclone-post_view', new_post.id)
     form = CreatePostForm()
-    return render(request, 'feed/createpost.html', {'form': form})
+    return render(request, 'feed/createpost.html', {'form': form, 'navbar_active_create': 'active'})
 
 
 @login_required
