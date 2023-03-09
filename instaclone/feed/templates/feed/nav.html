@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light">
   <div class="container-fluid">
     <button
       class="navbar-toggler shadow-none"
@@ -17,7 +17,7 @@
           <a
             class="nav-link {{ navbar_active_home }}"
             aria-current="page"
-            href="#"
+            href="{% url 'instaclone-main_feed' %}"
             >Home</a
           >
         </li>
@@ -25,7 +25,11 @@
           <a class="nav-link {{ navbar_active_explore }}" href="#">Explore</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ navbar_active_create }}" href="#">Create</a>
+          <a
+            class="nav-link {{ navbar_active_create }}"
+            href="{% url 'instaclone-create_post_view' %}"
+            >Create</a
+          >
         </li>
       </ul>
       <ul class="navbar-nav mx-auto d-none d-lg-block">
@@ -58,7 +62,11 @@
             </li>
             <li><hr class="dropdown-divider" /></li>
             <li>
-              <a class="navbar-text dropdown-item" href="#">Logout</a>
+              <a
+                class="navbar-text dropdown-item"
+                href="{% url 'instaclone-accounts_logout' %}"
+                >Logout</a
+              >
             </li>
           </ul>
         </li>
