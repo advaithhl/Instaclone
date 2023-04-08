@@ -1,0 +1,6 @@
+{% load date_formats %}
+<div class="row mx-auto mb-2">
+  <div class="col-auto mt-1 home-post-time text-muted">
+    {{ post.time_created | post_time_fmt }}
+  </div>
+</div>

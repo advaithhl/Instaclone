@@ -1,0 +1,13 @@
+{% with post.comment_set.count as comments_count %}
+{% if comments_count != 0 %}
+<div class="row mx-auto">
+  <div class="col-auto mt-1 home-post-text text-muted">
+    {% if comments_count > 1 %}
+    View all {{ comments_count }} comments
+    {% else%}
+    View {{ comments_count }} comment
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+{% endwith %}
