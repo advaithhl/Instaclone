@@ -1,0 +1,46 @@
+{% comment %}
+The below section is to be displayed when the display is large. It just renders
+the image and nothing else.
+{% endcomment %}
+<div class="d-none d-lg-flex">
+  <div class="container p-0">
+    <img
+      class="large-post-img"
+      src="{{ post.content.url }}"
+      alt="instaclone-image"
+    />
+  </div>
+</div>
+{% comment %}
+The below section is to be displayed when the display is small (or more
+precisely, hidden until the display is large). The render is similar to that
+seen on home feed.
+{% endcomment %}
+<div class="d-lg-none">
+  <div class="container post-container mt-2 p-0 border border-1">
+    <!-- Begin top row -->
+    {% include 'feed/post_components/toprow.html' %}
+    <!-- End top row -->
+    <!-- Begin content -->
+    {% include 'feed/post_components/content.html' %}
+    <!-- End content -->
+    <!-- Begin action row -->
+    {% include 'feed/post_components/actionrow.html' %}
+    <!-- End action row -->
+    <!-- Begin likes count -->
+    {% include 'feed/post_components/likescounter.html' %}
+    <!-- End likes count -->
+    <!-- Begin description -->
+    {% include 'feed/post_components/description.html' %}
+    <!-- End description -->
+    <!-- Begin time posted -->
+    {% include 'feed/post_components/timeposted.html' %}
+    <!-- End time posted -->
+    <!-- Begin comment iterator -->
+    {% include 'feed/viewpost_components/small/commentiterator.html' %}
+    <!-- End comment iterator -->
+    <!-- Begin comment form -->
+    {% include 'feed/viewpost_components/commentform.html' %}
+    <!-- End comment form -->
+  </div>
+</div>

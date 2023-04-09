@@ -1,0 +1,34 @@
+<div class="container view-post-side-container border border-1 p-0">
+  <div class="row mx-auto align-items-center">
+    <div class="col-auto p-2">
+      {% include 'feed/post_components/displaypicture.html' %}
+    </div>
+    <div class="col home-post-text fw-bold">
+      {{ post.creator.username }}
+    </div>
+    <div class="col-auto">
+      <button type="button" class="btn btn-outline-dark shadow-none" data-bs-toggle="modal" data-bs-target="#postModal">
+        ...
+      </button>
+    </div>
+    {% include 'feed/modals/viewpost_post_modal.html' %}
+    {% include 'feed/modals/deletepost_post_modal.html' %}
+  <hr class="hr-no-margin" />
+  <div class="mt-2 view-post-comments-box">
+    {% include 'feed/viewpost_components/large/captionsection.html' %}
+    <hr style="color: #ffffff" />
+    {% include 'feed/viewpost_components/large/commentiterator.html' %}
+  </div>
+  <hr class="hr-no-margin" />
+  <!-- Begin action row -->
+  {% include 'feed/post_components/actionrow.html' %}
+  <!-- End action row -->
+  <!-- Begin likes count -->
+  {% include 'feed/post_components/likescounter.html' %}
+  <!-- End likes count -->
+  <!-- Begin time posted -->
+  {% include 'feed/post_components/timeposted.html' %}
+  <!-- End time posted -->
+  {% include 'feed/viewpost_components/commentform.html' %}
+  </div>
+</div>
