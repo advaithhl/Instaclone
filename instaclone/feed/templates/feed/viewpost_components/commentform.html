@@ -1,0 +1,21 @@
+{% load widget_tweaks %}
+<form action="{% url 'instaclone-post_view' post.id %}" method="post">
+  {% csrf_token %}
+  <div class="row mx-auto">
+    <div class="col p-0">
+      <textarea
+        type="text"
+        class="form-control comment-create-input"
+        placeholder="Add a comment..."
+        aria-label="Add a comment"
+        aria-describedby="post-button"
+      ></textarea>
+      {% render_field form.text hidden="true" %}
+    </div>
+    <div class="col-auto my-auto p-0">
+      <button onclick="submitComment()" class="btn post-button" type="submit">
+        Post
+      </button>
+    </div>
+  </div>
+</form>

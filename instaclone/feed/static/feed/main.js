@@ -100,17 +100,13 @@ function submitPost() {
 }
 
 function submitComment() {
-  // This code is kinda sloppy, must be fixed after the interface redesign :(
   const input_text = document.getElementById("id_text");
-  const proxy_input_text1 = document.getElementById("proxy_input_text1");
-  const proxy_input_text2 = document.getElementById("proxy_input_text2");
+  const [ proxy_input_text1, proxy_input_text2 ] = document.getElementsByClassName("comment-create-input")
   const post_button = document.getElementsByClassName("post-button")[0];
 
-  if (proxy_input_text1.value == "") {
-    if (proxy_input_text2.value != "") {
-      input_text.value = proxy_input_text2.value;
-      post_button.click();
-    }
+  if (window.matchMedia("(min-width:992px)").matches) {
+    input_text.value = proxy_input_text2.value;
+    post_button.click();
   } else {
     input_text.value = proxy_input_text1.value;
     post_button.click();

@@ -1,0 +1,8 @@
+{% for comment in post.comment_set.iterator %}
+<div class="row mx-auto">
+  <div class="col mt-1 home-post-text">
+    <span class="fw-bold">{{ comment.author.username }}</span>
+    {{ comment.text }}
+  </div>
+</div>
+{% endfor %}
